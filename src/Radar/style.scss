@@ -1,41 +1,149 @@
 :root {
   --color-t: #ff3030;
   --color-ct: #00a3ef;
-  --color-bomb: #ca4a00;
+  --color-bomb: #ff7729;
+  --color-bomb-dark-rgb: 202, 74, 0;
+
+  --color-ct-rgb: 0, 163, 239;
+  --color-ct-dark: #1d3d56;
+  --color-ct-dark-rgb: 29, 61, 86;
+  --color-ct-darkest: #0c1a28;
+  --color-ct-darkest-rgb: 12, 26, 40;
+
+  --color-t-bright: #ff7c7c;
+  --color-t-rgb: 255, 48, 48;
+  --color-t-dark: #561d1d;
+  --color-t-darkest: #280c0c;
+  --color-t-bright-rgb: 255, 124, 124;
+  --color-t-dark-rgb: 86, 29, 29;
+  --color-t-darkest-rgb: 40, 12, 12;
+}
+
+.RadarWrapper {
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 512px;
+  height: 512px;
 }
 
 .Radar {
-  background-color: rgba(0, 0, 0, 0.2);
-  width: 1024px;
-  height: 1024px;
+  width: 100%;
+  height: 100%;
   background-position: center center;
   background-size: 100%;
   position: relative;
+  transform: scale(1.1);
+  transition: transform 0.025;
+  transition: all 1s;
 }
 
 .Player {
-  width: 30px;
-  height: 30px;
-  border-radius: 30px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
+  font-size: 16px;
   color: white;
-  line-height: 16px;
   font-weight: 700;
+  transition: all 0.3s linear;
   font-family: sans-serif;
+  transform: translate(-50%, 50%);
+  transform-origin: 0% 100%;
+  display: inline-flex;
+  z-index: 50;
+
+  .pointer {
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-radius: 3px;
+    z-index: -1;
+    border: 10px solid transparent;
+    border-top-color: green;
+  }
+
+  span {
+    position: relative;
+    z-index: 10;
+    // display: inline-block;
+    width: 100%;
+    text-align: center;
+  }
 
   &.T {
     background-color: var(--color-t);
+    box-shadow: 0 0 10px rgba(var(--color-t-rgb, 0.5));
+    text-shadow: 0 0 5px rgba(var(--color-t-dark-rgb, 1));
+
+    &.Player--Dead {
+      background-color: transparent;
+      box-shadow: none;
+      color: var(--color-t);
+    }
+
+    &.Player--HasBomb {
+      border-radius: 3px;
+      background-color: var(--color-bomb);
+      box-shadow: 0 0 10px rgba(var(--color-bomb-dark-rgb), 0.5);
+      text-shadow: 0 0 5px rgba(var(--color-bomb-dark-rgb), 1);
+    }
   }
 
   &.CT {
     background-color: var(--color-ct);
+    box-shadow: 0 0 10px rgba(var(--color-ct-rgb, 0.5));
+    text-shadow: 0 0 5px rgba(var(--color-ct-dark-rgb, 1));
+
+    &.Player--Dead {
+      background-color: transparent;
+      box-shadow: none;
+      color: var(--color-ct);
+    }
   }
 
   &--Dead {
-    opacity: 0.1;
+    opacity: 1;
+    z-index: 1;
+    font-style: italic;
+    font-weight: 900;
+  }
+}
+
+#bomb {
+  position: absolute;
+  background-image: url('./assets/bomb-dropped.png');
+  background-size: contain;
+  height: 20px;
+  width: 20px;
+  bottom: -30%;
+  left: -30%;
+  transform: translate(-50%, 50%);
+  transform-origin: bottom left;
+}
+
+#bomb.defused {
+  background-image: url('./assets/bomb-defused.png');
+  filter: drop-shadow(0 0 0.4vmin rgba(0, 255, 0, 0.3));
+}
+
+#bomb.planted {
+  background-image: url('./assets/bomb-planted.png');
+  animation: beep 1s infinite;
+}
+
+@keyframes beep {
+  0% {
+    filter: drop-shadow(0 0 0 rgba(255, 0, 0, 1));
+    background-color: rgba(255, 0, 0, 0);
+  }
+  10% {
+    filter: drop-shadow(0 0 1vmin rgba(255, 0, 0, 1));
+    background-color: rgba(255, 0, 0, 0.2);
+  }
+  20% {
+    filter: drop-shadow(0 0 1.8vmin rgba(255, 0, 0, 0));
+    background-color: rgba(255, 0, 0, 0);
   }
 }

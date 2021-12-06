@@ -12,21 +12,38 @@ export const parsePosition = (position, config) => {
   let pixelYPosition = Math.abs(gameYPosition) / config.scale;
   let yPosition = (pixelYPosition / 1024) * 100;
 
-  console.log(y, gameYPosition, pixelXPosition, yPosition);
-
   return {
     y: yPosition,
     x: xPosition,
   };
 };
 
+export const parseAngle = (forward) => {
+  let angle = 0;
+
+  if (parseFloat(forward[0]) > 0) {
+    angle = 90 + parseFloat(forward[1]) * -1 * 90;
+  } else {
+    angle = 270 + parseFloat(forward[1]) * 90;
+  }
+
+  return angle;
+};
+
 export const plotPlayers = (game, mapConfig) => {
   return game.players.map((player) => {
     const classnames = ['Player', player.team.side];
     const playerPosition = parsePosition(player.position, mapConfig);
+    const playerAngle = parseAngle(player.forward);
 
     if (player.state.health === 0) {
       classnames.push('Player--Dead');
+    }
+
+    if (game.bomb.state === 'carried') {
+      if (game.bomb.player.steamid === player.steamid) {
+        classnames.push('Player--HasBomb');
+      }
     }
 
     return (
@@ -38,7 +55,7 @@ export const plotPlayers = (game, mapConfig) => {
         }}
         className={classnames.join(' ').trim()}
       >
-        {player.observer_slot}
+        <span>{player.state.health === 0 ? 'X' : player.observer_slot}</span>
       </div>
     );
   });
