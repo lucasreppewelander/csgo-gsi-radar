@@ -4,12 +4,12 @@ export const parsePosition = (position, config) => {
   let x = position[0],
     y = position[1];
 
-  let gameXPosition = x + Math.abs(config.x);
-  let pixelXPosition = Math.abs(gameXPosition) / config.scale;
+  let gameXPosition = x - config.x;
+  let pixelXPosition = gameXPosition / config.scale;
   let xPosition = (pixelXPosition / 1024) * 100;
 
-  let gameYPosition = y + Math.abs(config.y);
-  let pixelYPosition = Math.abs(gameYPosition) / config.scale;
+  let gameYPosition = y - config.y;
+  let pixelYPosition = gameYPosition / -config.scale;
   let yPosition = (pixelYPosition / 1024) * 100;
 
   return {
@@ -50,7 +50,7 @@ export const plotPlayers = (game, mapConfig) => {
       <div
         key={player.name}
         style={{
-          bottom: playerPosition.y + '%',
+          top: playerPosition.y + '%',
           left: playerPosition.x + '%',
         }}
         className={classnames.join(' ').trim()}
