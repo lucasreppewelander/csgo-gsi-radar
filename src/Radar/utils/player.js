@@ -47,16 +47,29 @@ export const plotPlayers = (game, mapConfig) => {
     }
 
     return (
-      <div
-        key={player.name}
-        style={{
-          top: playerPosition.y + '%',
-          left: playerPosition.x + '%',
-        }}
-        className={classnames.join(' ').trim()}
-      >
-        <span>{player.state.health === 0 ? 'X' : player.observer_slot}</span>
-      </div>
+      <>
+        <div
+          key={`${player.name}-player`}
+          style={{
+            top: playerPosition.y + '%',
+            left: playerPosition.x + '%',
+            transform: `translate(-50%, -50%)`
+          }}
+          className={classnames.join(' ').trim()}
+        >
+          <span>{player.observer_slot}</span>
+        </div>
+        <div
+          key={`${player.name}-pointer`}
+          className="player-indicator"
+          style={{
+            top: playerPosition.y + '%',
+            left: playerPosition.x + '%',
+            opacity: player.state.health === 0 ? 0 : 1,
+            transform: `rotate(${playerAngle - 45}deg) translate(-50%, -50%)`
+          }}
+        />
+      </>
     );
   });
 };

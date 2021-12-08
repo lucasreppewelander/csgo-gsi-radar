@@ -12,7 +12,6 @@ export default function Radar({ game }) {
   }
 
   const { config, name } = currentMap(game);
-  console.log(config);
 
   const radarProps = {
     style: {
@@ -21,10 +20,11 @@ export default function Radar({ game }) {
   };
 
   return (
-    <div className="RadarWrapper">
-      <div className="Radar" {...radarProps}>
+    <div key="RadarWrapper" className="RadarWrapper">
+      <div key="Radar" className="Radar" {...radarProps}>
         {plotPlayers(game, config)}
         {plotBomb(game, config)}
+        {plotGrenades(game, config)}
       </div>
     </div>
   );

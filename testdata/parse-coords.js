@@ -6,7 +6,6 @@ const scale = 5.0;
 function WorldToMap(position) {
   let offsetX = position[0] - pos_x / (scale * 2);
   let offsetY = position[1] - pos_y / (-scale * 2);
-  console.log('(-scale * 2)', -scale * 2);
 
   return {
     x: offsetX,
@@ -17,7 +16,7 @@ function WorldToMap(position) {
 // position = [x,y,z]
 function MapToRadar(position) {
   let originOffset = WorldToMap(position);
-  console.log('originOffset', originOffset);
+
   let offsetX = position[0] - 512;
   let offsetY = position[1] - 512;
 
@@ -36,7 +35,6 @@ function MapToRadar(position) {
 function runner() {
   const playerPosition = [-258.71, -2152.25, -173.31];
   const { x, y } = MapToRadar(playerPosition);
-  console.log(x, y);
 }
 
 runner();

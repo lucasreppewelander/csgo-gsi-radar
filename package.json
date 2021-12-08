@@ -1,7 +1,7 @@
 {
   "name": "csgo-gsi-radar",
   "version": "1.0.0",
-  "description": "A radar implementation with GSI information",
+  "description": "A drop-in radar implementation in react with GSI information",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,13 +11,17 @@
     "type": "git",
     "url": "git+https://github.com/lucasreppewelander/csgo-gsi-radar.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["react", "csgo", "gsi", "game state integration"],
+  "author": "Lucas Reppe Welander",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/lucasreppewelander/csgo-gsi-radar/issues"
   },
   "homepage": "https://github.com/lucasreppewelander/csgo-gsi-radar#readme",
+  "peerDependencies": {
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
+  },
   "devDependencies": {
     "@babel/cli": "^7.16.0",
     "@babel/core": "^7.16.0",
