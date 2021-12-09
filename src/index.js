@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import Radar from './Radar';
 import { CSGOGSI } from 'csgogsi';
 
-import { testData } from '../testdata/fullrun';
-// import testData from '../testdata/gsi';
+// import { testData } from '../testdata/fullrun';
+import testData from '../testdata/gsi';
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -15,7 +15,7 @@ function RenderRadar() {
   const [game, setGame] = useState({});
 
   useEffect(() => {
-    if (false) {
+    if (true) {
       const parsed = GSI.digest(testData);
       setGame(parsed);
 

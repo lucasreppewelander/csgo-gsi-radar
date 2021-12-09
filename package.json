@@ -4,14 +4,19 @@
   "description": "A drop-in radar implementation in react with GSI information",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack serve"
+    "start": "webpack serve --open --config webpack.dev.js",
+    "build": "rimraf ./dist && webpack --config webpack.prod.js && node generate-publish-package.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lucasreppewelander/csgo-gsi-radar.git"
   },
-  "keywords": ["react", "csgo", "gsi", "game state integration"],
+  "keywords": [
+    "react",
+    "csgo",
+    "gsi",
+    "game state integration"
+  ],
   "author": "Lucas Reppe Welander",
   "license": "MIT",
   "bugs": {
@@ -41,6 +46,7 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.64.4",
     "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.6.0"
+    "webpack-dev-server": "^4.6.0",
+    "webpack-merge": "^5.8.0"
   }
 }
