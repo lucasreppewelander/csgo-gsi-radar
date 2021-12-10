@@ -25,7 +25,7 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
+        type: 'asset/inline',
       },
     ],
   },
@@ -35,5 +35,5 @@ module.exports = {
   plugins: [],
   resolve: {
     extensions: ['.js', '.json', '.jsx'],
-  }
+  },
 };

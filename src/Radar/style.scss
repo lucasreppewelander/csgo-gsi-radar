@@ -21,8 +21,8 @@
 
 .RadarWrapper {
   background-color: rgba(0, 0, 0, 0.2);
-  width: 512px;
-  height: 512px;
+  width: 100%;
+  height: 100%;
 }
 
 .Radar {
@@ -44,17 +44,22 @@
   background-color: yellow;
   transition: all 0.3s linear;
   transform-origin: 0% 0%;
-  border-radius: 100% .2vmin 100% 100%;
+  border-radius: 100% 0.2vmin 100% 100%;
 
   &:after {
     content: '';
-	position: absolute;
-	z-index: 14;
-	opacity: 0;
-	transition: opacity .02s;
+    position: absolute;
+    z-index: 14;
+    opacity: 0;
+    transition: opacity 0.02s;
     height: 6.6vmin;
     width: 6.6vmin;
-    background: linear-gradient(180deg, #888 1vmin, #0000 0), linear-gradient(270deg, #888 1vmin, #0000 0), linear-gradient(180deg, #bbb 2vmin, #0000 0), linear-gradient(270deg, #bbb 2vmin, #0000 0), linear-gradient(180deg, #fff 3vmin, #0000 0), linear-gradient(270deg, #fff 3vmin, #0000 0);
+    background: linear-gradient(180deg, #888 1vmin, #0000 0),
+      linear-gradient(270deg, #888 1vmin, #0000 0),
+      linear-gradient(180deg, #bbb 2vmin, #0000 0),
+      linear-gradient(270deg, #bbb 2vmin, #0000 0),
+      linear-gradient(180deg, #fff 3vmin, #0000 0),
+      linear-gradient(270deg, #fff 3vmin, #0000 0);
     left: 2vmin;
     bottom: 2vmin;
   }
@@ -130,13 +135,26 @@
 
   &--Dead {
     z-index: 1;
-    box-shadow: none!important;
+    box-shadow: none !important;
     color: transparent;
-    text-shadow: none!important;
+    text-shadow: none !important;
     opacity: 0.8;
     width: 15px;
     height: 15px;
-    clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);
+    clip-path: polygon(
+      20% 0%,
+      0% 20%,
+      30% 50%,
+      0% 80%,
+      20% 100%,
+      50% 70%,
+      80% 100%,
+      100% 80%,
+      70% 50%,
+      100% 20%,
+      80% 0%,
+      50% 30%
+    );
   }
 }
 
@@ -187,11 +205,11 @@
   transition: all 0.3s linear;
 
   .background {
-    border-radius:50%;
+    border-radius: 50%;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    opacity:1;
+    opacity: 1;
     transition: all 0.3s linear;
     width: 100%;
     height: 100%;
@@ -202,7 +220,7 @@
     height: 40px;
 
     .background {
-      background-color: rgba(255,255,255,0.5);
+      background-color: rgba(255, 255, 255, 0.5);
       opacity: 1;
       transition: opacity 1s;
     }
@@ -218,7 +236,7 @@
 
   &.firebomb {
     .background {
-      background-color:transparent;
+      background-color: transparent;
       background-image: url('./assets/firebomb.png');
       filter: invert(1);
     }
