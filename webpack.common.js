@@ -4,7 +4,7 @@ module.exports = {
   entry: ['regenerator-runtime/runtime.js', './src'],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
+    filename: 'index.js',
   },
   module: {
     rules: [
@@ -28,6 +28,9 @@ module.exports = {
         type: 'asset/resource',
       },
     ],
+  },
+  optimization: {
+    minimize: false,
   },
   plugins: [],
   resolve: {

@@ -1,5 +1,5 @@
 {
-  "name": "csgo-gsi-radar",
+  "name": "react-csgo-radar",
   "version": "1.0.0",
   "description": "A drop-in radar implementation in react with GSI information",
   "main": "index.js",
@@ -15,6 +15,7 @@
     "react",
     "csgo",
     "gsi",
+    "radar",
     "game state integration"
   ],
   "author": "Lucas Reppe Welander",

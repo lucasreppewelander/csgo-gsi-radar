@@ -19,6 +19,8 @@ export default function Radar({ game }) {
     },
   };
 
+  console.log('Radar v1.0')
+
   return (
     <div key="RadarWrapper" className="RadarWrapper">
       <div key="Radar" className="Radar" {...radarProps}>
