@@ -19,10 +19,8 @@ export default function Radar({ game }) {
     },
   };
 
-  console.log('Radar v1.0')
-
   return (
-    <div key="RadarWrapper" className="RadarWrapper">
+    <div id="csgo-gsi-radar" key="RadarWrapper" className="RadarWrapper">
       <div key="Radar" className="Radar" {...radarProps}>
         {plotPlayers(game, config)}
         {plotBomb(game, config)}

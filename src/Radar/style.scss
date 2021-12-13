@@ -1,293 +1,266 @@
-:root {
-  --color-t: #ff3030;
-  --color-ct: #00a3ef;
-  --color-bomb: #ff7729;
-  --color-bomb-dark-rgb: 202, 74, 0;
-
-  --color-ct-rgb: 0, 163, 239;
-  --color-ct-dark: #1d3d56;
-  --color-ct-dark-rgb: 29, 61, 86;
-  --color-ct-darkest: #0c1a28;
-  --color-ct-darkest-rgb: 12, 26, 40;
-
-  --color-t-bright: #ff7c7c;
-  --color-t-rgb: 255, 48, 48;
-  --color-t-dark: #561d1d;
-  --color-t-darkest: #280c0c;
-  --color-t-bright-rgb: 255, 124, 124;
-  --color-t-dark-rgb: 86, 29, 29;
-  --color-t-darkest-rgb: 40, 12, 12;
-}
-
-.RadarWrapper {
-  background-color: rgba(0, 0, 0, 0.2);
-  width: 100%;
-  height: 100%;
-}
-
-.Radar {
-  user-select: none;
-  width: 100%;
-  height: 100%;
-  background-position: center center;
-  background-size: 100%;
-  position: relative;
-  transition: transform 0.025;
-  transition: all 1s;
-}
-
-.player-indicator {
-  height: 20px;
-  width: 20px;
-  z-index: 45;
-  position: absolute;
-  background-color: yellow;
-  transition: all 0.3s linear;
-  transform-origin: 0% 0%;
-  border-radius: 100% 0.2vmin 100% 100%;
-
-  &:after {
-    content: '';
-    position: absolute;
-    z-index: 14;
-    opacity: 0;
-    transition: opacity 0.02s;
-    height: 6.6vmin;
-    width: 6.6vmin;
-    background: linear-gradient(180deg, #888 1vmin, #0000 0),
-      linear-gradient(270deg, #888 1vmin, #0000 0),
-      linear-gradient(180deg, #bbb 2vmin, #0000 0),
-      linear-gradient(270deg, #bbb 2vmin, #0000 0),
-      linear-gradient(180deg, #fff 3vmin, #0000 0),
-      linear-gradient(270deg, #fff 3vmin, #0000 0);
-    left: 2vmin;
-    bottom: 2vmin;
-  }
-}
-
-.Player.CT + .player-indicator {
-  background-color: var(--color-ct);
-}
-
-.Player.T + .player-indicator {
-  background-color: var(--color-t);
-}
-
-.Player.Player--HasBomb + .player-indicator {
-  background-color: var(--color-bomb);
-}
-
-.Player {
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  color: white;
-  font-weight: 700;
-  transition: all 0.3s linear;
-  font-family: sans-serif;
-  transform: translate(-50%, -50%);
-  transform-origin: 50% 50%;
-  display: inline-flex;
-  z-index: 50;
-  // color: #333;
-
-  .pointer {
-    width: 0;
-    height: 0;
-    position: absolute;
-    border-radius: 3px;
-    z-index: -1;
-    border: 10px solid transparent;
-    border-top-color: green;
-  }
-
-  span {
-    position: relative;
-    z-index: 10;
-    // display: inline-block;
-    width: 100%;
-    text-align: center;
-  }
-
-  &.T {
-    background-color: var(--color-t);
-    // box-shadow: 0 0 10px rgba(var(--color-t-rgb, 0.5));
-    // text-shadow: 0 0 5px rgba(var(--color-t-dark-rgb, 1));
-
-    &.Player--HasBomb {
-      // border-radius: 3px;
-      background-color: var(--color-bomb);
-      // box-shadow: 0 0 10px rgba(var(--color-bomb-dark-rgb), 0.5);
-      // text-shadow: 0 0 5px rgba(var(--color-bomb-dark-rgb), 1);
-    }
-  }
-
-  &.CT {
-    background-color: var(--color-ct);
-    // box-shadow: 0 0 10px rgba(var(--color-ct-rgb, 0.5));
-    // text-shadow: 0 0 5px rgba(var(--color-ct-dark-rgb, 1));
-  }
-
-  &--Dead {
-    z-index: 1;
-    box-shadow: none !important;
-    color: transparent;
-    text-shadow: none !important;
-    opacity: 0.8;
-    width: 15px;
-    height: 15px;
-    clip-path: polygon(
-      20% 0%,
-      0% 20%,
-      30% 50%,
-      0% 80%,
-      20% 100%,
-      50% 70%,
-      80% 100%,
-      100% 80%,
-      70% 50%,
-      100% 20%,
-      80% 0%,
-      50% 30%
-    );
-  }
-}
-
-#bomb {
-  position: absolute;
-  background-image: url('./assets/bomb-dropped.png');
-  background-size: contain;
-  z-index: 40;
-  height: 15px;
-  width: 15px;
-  transform: translate(-50%, -50%);
-  // transform-origin: center center;
-  transition: all 0.3s linear;
-}
-
-#bomb.defused {
-  background-image: url('./assets/bomb-defused.png');
-  filter: drop-shadow(0 0 0.4vmin rgba(0, 255, 0, 0.3));
-}
-
-#bomb.planted {
-  background-image: url('./assets/bomb-planted.png');
-  animation: beep 1s infinite;
-}
-
-@keyframes beep {
-  0% {
-    filter: drop-shadow(0 0 0 rgba(255, 0, 0, 1));
-    background-color: rgba(255, 0, 0, 0);
-  }
-  10% {
-    filter: drop-shadow(0 0 1vmin rgba(255, 0, 0, 1));
-    background-color: rgba(255, 0, 0, 0.2);
-  }
-  20% {
-    filter: drop-shadow(0 0 1.8vmin rgba(255, 0, 0, 0));
-    background-color: rgba(255, 0, 0, 0);
-  }
-}
-
-.grenade {
-  height: 20px;
-  width: 20px;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s linear;
-
-  .background {
-    border-radius: 50%;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 1;
-    transition: all 0.3s linear;
+#csgo-gsi-radar {
+  &.RadarWrapper {
+    background-color: rgba(0, 0, 0, 0.2);
     width: 100%;
     height: 100%;
   }
 
-  &.smoke {
-    width: 40px;
-    height: 40px;
+  .Radar {
+    user-select: none;
+    width: 100%;
+    height: 100%;
+    background-position: center center;
+    background-size: 100%;
+    position: relative;
+    transition: transform 0.025;
+    transition: all 1s;
+  }
 
-    .background {
-      background-color: rgba(255, 255, 255, 0.5);
-      opacity: 1;
-      transition: opacity 1s;
+  .player-indicator {
+    height: 20px;
+    width: 20px;
+    z-index: 45;
+    position: absolute;
+    background-color: yellow;
+    transition: all 0.3s linear;
+    transform-origin: 0% 0%;
+    border-radius: 100% 0.2vmin 100% 100%;
+
+    &:after {
+      content: '';
+      position: absolute;
+      z-index: 14;
+      opacity: 0;
+      transition: opacity 0.02s;
+      height: 6.6vmin;
+      width: 6.6vmin;
+      background: linear-gradient(180deg, #888 1vmin, #0000 0),
+        linear-gradient(270deg, #888 1vmin, #0000 0),
+        linear-gradient(180deg, #bbb 2vmin, #0000 0),
+        linear-gradient(270deg, #bbb 2vmin, #0000 0),
+        linear-gradient(180deg, #fff 3vmin, #0000 0),
+        linear-gradient(270deg, #fff 3vmin, #0000 0);
+      left: 2vmin;
+      bottom: 2vmin;
+    }
+  }
+
+  .Player.CT + .player-indicator {
+    background-color: var(--color-ct);
+  }
+
+  .Player.T + .player-indicator {
+    background-color: var(--color-t);
+  }
+
+  .Player.Player--HasBomb + .player-indicator {
+    background-color: var(--color-bomb);
+  }
+
+  .Player {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    color: white;
+    font-weight: 700;
+    transition: all 0.3s linear;
+    font-family: sans-serif;
+    transform: translate(-50%, -50%);
+    transform-origin: 50% 50%;
+    display: inline-flex;
+    z-index: 50;
+    // color: #333;
+
+    .pointer {
+      width: 0;
+      height: 0;
+      position: absolute;
+      border-radius: 3px;
+      z-index: -1;
+      border: 10px solid transparent;
+      border-top-color: green;
     }
 
-    &.inair {
+    span {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      text-align: center;
+    }
+
+    &.T {
+      background-color: var(--color-t);
+
+      &.Player--HasBomb {
+        background-color: var(--color-bomb);
+      }
+    }
+
+    &.CT {
+      background-color: var(--color-ct);
+    }
+
+    &--Dead {
+      z-index: 1;
+      box-shadow: none !important;
+      color: transparent;
+      text-shadow: none !important;
+      opacity: 0.8;
+      width: 15px;
+      height: 15px;
+      clip-path: polygon(
+        20% 0%,
+        0% 20%,
+        30% 50%,
+        0% 80%,
+        20% 100%,
+        50% 70%,
+        80% 100%,
+        100% 80%,
+        70% 50%,
+        100% 20%,
+        80% 0%,
+        50% 30%
+      );
+    }
+  }
+
+  #bomb {
+    position: absolute;
+    background-image: url('./assets/bomb-dropped.png');
+    background-size: contain;
+    z-index: 40;
+    height: 15px;
+    width: 15px;
+    transform: translate(-50%, -50%);
+    // transform-origin: center center;
+    transition: all 0.3s linear;
+  }
+
+  #bomb.defused {
+    background-image: url('./assets/bomb-defused.png');
+    filter: drop-shadow(0 0 0.4vmin rgba(0, 255, 0, 0.3));
+  }
+
+  #bomb.planted {
+    background-image: url('./assets/bomb-planted.png');
+    animation: beep 1s infinite;
+  }
+
+  @keyframes beep {
+    0% {
+      filter: drop-shadow(0 0 0 rgba(255, 0, 0, 1));
+      background-color: rgba(255, 0, 0, 0);
+    }
+    10% {
+      filter: drop-shadow(0 0 1vmin rgba(255, 0, 0, 1));
+      background-color: rgba(255, 0, 0, 0.2);
+    }
+    20% {
+      filter: drop-shadow(0 0 1.8vmin rgba(255, 0, 0, 0));
+      background-color: rgba(255, 0, 0, 0);
+    }
+  }
+
+  .grenade {
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s linear;
+
+    .background {
+      border-radius: 50%;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 1;
+      transition: all 0.3s linear;
+      width: 100%;
+      height: 100%;
+    }
+
+    &.smoke {
+      width: 40px;
+      height: 40px;
+
+      .background {
+        background-color: rgba(255, 255, 255, 0.5);
+        opacity: 1;
+        transition: opacity 1s;
+      }
+
+      &.inair {
+        .background {
+          background-color: transparent;
+          background-image: url('./assets/smoke.png');
+          filter: invert(1);
+        }
+      }
+    }
+
+    &.firebomb {
       .background {
         background-color: transparent;
-        background-image: url('./assets/smoke.png');
+        background-image: url('./assets/firebomb.png');
         filter: invert(1);
       }
     }
-  }
 
-  &.firebomb {
-    .background {
-      background-color: transparent;
-      background-image: url('./assets/firebomb.png');
+    &.flame {
+      width: 5px;
+      height: 5px;
+      border-radius: 3px;
+      background-color: red;
+      opacity: 1;
+    }
+
+    &.flashbang {
       filter: invert(1);
-    }
-  }
-
-  &.flame {
-    width: 5px;
-    height: 5px;
-    border-radius: 3px;
-    background-color: red;
-    opacity: 1;
-  }
-
-  &.flashbang {
-    filter: invert(1);
-    .background {
-      background-image: url('./assets/flash.png');
-      background-color: transparent;
-    }
-
-    &.exploded {
-      .explode-point {
-        position: absolute;
-        width: 2px;
-        height: 2px;
-        border-radius: 0.08px;
-        animation: FlashOrFragDeployed 0.25s 1 forwards;
-      }
       .background {
-        opacity: 0;
+        background-image: url('./assets/flash.png');
+        background-color: transparent;
+      }
+
+      &.exploded {
+        .explode-point {
+          position: absolute;
+          width: 2px;
+          height: 2px;
+          border-radius: 0.08px;
+          animation: FlashOrFragDeployed 0.25s 1 forwards;
+        }
+        .background {
+          opacity: 0;
+        }
       }
     }
-  }
 
-  &.frag {
-    filter: invert(1);
-    .background {
-      background-image: url('./assets/frag.png');
-      background-color: transparent;
-    }
-
-    &.exploded {
-      .explode-point {
-        position: absolute;
-        width: 2px;
-        height: 2px;
-        border-radius: 0.08px;
-        animation: FlashOrFragDeployed 0.25s 1 forwards;
-      }
+    &.frag {
+      filter: invert(1);
       .background {
-        opacity: 0;
+        background-image: url('./assets/frag.png');
+        background-color: transparent;
+      }
+
+      &.exploded {
+        .explode-point {
+          position: absolute;
+          width: 2px;
+          height: 2px;
+          border-radius: 0.08px;
+          animation: FlashOrFragDeployed 0.25s 1 forwards;
+        }
+        .background {
+          opacity: 0;
+        }
       }
     }
   }
