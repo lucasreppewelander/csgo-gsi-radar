@@ -36,6 +36,10 @@ export const plotPlayers = (game, mapConfig) => {
     const playerPosition = parsePosition(player.position, mapConfig);
     const playerAngle = parseAngle(player.forward);
 
+    if (player.steamid === game.player.steamid) {
+      classnames.push('Player--Observed');
+    }
+
     if (player.state.health === 0) {
       classnames.push('Player--Dead');
     }
