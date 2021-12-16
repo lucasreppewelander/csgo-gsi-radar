@@ -3,6 +3,10 @@ import { parsePosition } from './player';
 
 export const plotBomb = (game, mapConfig) => {
   const { bomb } = game;
+  if (!bomb) {
+    return null;
+  }
+
   if (bomb.state === 'carried' || bomb.state === 'exploded') {
     return null;
   }

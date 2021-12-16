@@ -40,8 +40,8 @@ export const plotPlayers = (game, mapConfig) => {
       classnames.push('Player--Dead');
     }
 
-    if (game.bomb.state === 'carried') {
-      if (game.bomb.player.steamid === player.steamid) {
+    if (game.bomb && game.bomb.state && game.bomb.state === 'carried') {
+      if (game.bomb.player && game.bomb.player.steamid === player.steamid) {
         classnames.push('Player--HasBomb');
       }
     }
@@ -53,7 +53,7 @@ export const plotPlayers = (game, mapConfig) => {
           style={{
             top: playerPosition.y + '%',
             left: playerPosition.x + '%',
-            transform: `translate(-50%, -50%)`
+            transform: `translate(-50%, -50%)`,
           }}
           className={classnames.join(' ').trim()}
         >
@@ -66,7 +66,7 @@ export const plotPlayers = (game, mapConfig) => {
             top: playerPosition.y + '%',
             left: playerPosition.x + '%',
             opacity: player.state.health === 0 ? 0 : 1,
-            transform: `rotate(${playerAngle - 45}deg) translate(-50%, -50%)`
+            transform: `rotate(${playerAngle - 45}deg) translate(-50%, -50%)`,
           }}
         />
       </>
