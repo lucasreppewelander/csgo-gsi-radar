@@ -5,6 +5,7 @@ import { CSGOGSI } from 'csgogsi';
 
 // import { testData } from '../testdata/fullrun';
 import testData from '../testdata/gsi';
+import './dev.scss';
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -38,7 +39,9 @@ function RenderRadar() {
 
 ReactDOM.render(
   <React.StrictMode>
-    <RenderRadar />
+    <div style={{ width: 512, height: 512 }}>
+      <RenderRadar />
+    </div>
   </React.StrictMode>,
   document.getElementById('root'),
 );

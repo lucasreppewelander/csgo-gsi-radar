@@ -44,6 +44,10 @@ export const plotPlayers = (game, mapConfig) => {
       classnames.push('Player--Dead');
     }
 
+    if (player.state.flashed > 0) {
+      classnames.push('Player--Flashed');
+    }
+
     if (game.bomb && game.bomb.state && game.bomb.state === 'carried') {
       if (game.bomb.player && game.bomb.player.steamid === player.steamid) {
         classnames.push('Player--HasBomb');
@@ -53,7 +57,7 @@ export const plotPlayers = (game, mapConfig) => {
     return (
       <>
         <div
-          key={`${player.name}-player`}
+          key={`${player.steamid || player.name}-player`}
           style={{
             top: playerPosition.y + '%',
             left: playerPosition.x + '%',
@@ -64,7 +68,7 @@ export const plotPlayers = (game, mapConfig) => {
           <span>{player.observer_slot}</span>
         </div>
         <div
-          key={`${player.name}-pointer`}
+          key={`${player.steamid || player.name}-pointer`}
           className="player-indicator"
           style={{
             top: playerPosition.y + '%',
