@@ -4,8 +4,9 @@ import Radar from './Radar';
 import { CSGOGSI } from 'csgogsi';
 import './dev.scss';
 
-import { testData } from '../testdata/fullrun';
-// import testData from '../testdata/gsi';
+// import { testData } from '../testdata/fullrun';
+import testData from '../testdata/gsi';
+import './dev.scss';
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -39,7 +40,7 @@ function RenderRadar() {
 
 ReactDOM.render(
   <React.StrictMode>
-    <div style={{ width: 700, height: 700 }}>
+    <div style={{ width: 512, height: 512 }}>
       <RenderRadar />
     </div>
   </React.StrictMode>,
