@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import Radar from './Radar';
 import { CSGOGSI } from 'csgogsi';
+import './dev.scss';
 
 // import { testData } from '../testdata/fullrun';
 import testData from '../testdata/gsi';
@@ -16,7 +17,7 @@ function RenderRadar() {
   const [game, setGame] = useState({});
 
   useEffect(() => {
-    if (true) {
+    if (false) {
       const parsed = GSI.digest(testData);
       setGame(parsed);
 

@@ -31,7 +31,11 @@ export const parseAngle = (forward) => {
 };
 
 export const plotPlayers = (game, mapConfig) => {
-  return game?.players.map((player) => {
+  return game.players.map((player) => {
+    if (!player || !player.name) {
+      return null;
+    }
+
     const classnames = ['Player', player.team.side];
     const playerPosition = parsePosition(player.position, mapConfig);
     const playerAngle = parseAngle(player.forward);
