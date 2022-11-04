@@ -7,19 +7,19 @@ export const plotBomb = (game, mapConfig) => {
     return null;
   }
 
-  if (bomb.state === 'carried' || bomb.state === 'exploded') {
+  if (bomb?.state === 'carried' || bomb?.state === 'exploded') {
     return null;
   }
 
   const classnames = ['bomb'];
 
-  if (bomb.state === 'planted' || bomb.state === 'defusing') {
+  if (bomb?.state === 'planted' || bomb?.state === 'defusing') {
     classnames.push('planted');
-  } else if (bomb.state === 'defused') {
+  } else if (bomb?.state === 'defused') {
     classnames.push('defused');
   }
 
-  const bombPosition = parsePosition(bomb.position.split(', '), mapConfig);
+  const bombPosition = parsePosition(bomb?.position.split(', '), mapConfig);
 
   return (
     <div
@@ -27,8 +27,8 @@ export const plotBomb = (game, mapConfig) => {
       key="bomb"
       className={classnames.join(' ').trim()}
       style={{
-        top: bombPosition.y + '%',
-        left: bombPosition.x + '%',
+        top: bombPosition?.y + '%',
+        left: bombPosition?.x + '%',
       }}
     ></div>
   );

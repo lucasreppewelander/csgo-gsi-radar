@@ -31,25 +31,25 @@ export const parseAngle = (forward) => {
 };
 
 export const plotPlayers = (game, mapConfig) => {
-  return game.players.map((player) => {
+  return game?.players.map((player) => {
     const classnames = ['Player', player.team.side];
     const playerPosition = parsePosition(player.position, mapConfig);
     const playerAngle = parseAngle(player.forward);
 
-    if (player.steamid === game.player.steamid) {
+    if (player?.steamid === game?.player?.steamid) {
       classnames.push('Player--Observed');
     }
 
-    if (player.state.health === 0) {
+    if (player?.state?.health === 0) {
       classnames.push('Player--Dead');
     }
 
-    if (player.state.flashed > 0) {
+    if (player?.state?.flashed > 0) {
       classnames.push('Player--Flashed');
     }
 
-    if (game.bomb && game.bomb.state && game.bomb.state === 'carried') {
-      if (game.bomb.player && game.bomb.player.steamid === player.steamid) {
+    if (game?.bomb?.state === 'carried') {
+      if (game?.bomb?.player?.steamid === player?.steamid) {
         classnames.push('Player--HasBomb');
       }
     }
@@ -57,23 +57,23 @@ export const plotPlayers = (game, mapConfig) => {
     return (
       <>
         <div
-          key={`${player.steamid || player.name}-player`}
+          key={`${player?.steamid || player?.name}-player`}
           style={{
-            top: playerPosition.y + '%',
-            left: playerPosition.x + '%',
+            top: playerPosition?.y + '%',
+            left: playerPosition?.x + '%',
             transform: `translate(-50%, -50%)`,
           }}
           className={classnames.join(' ').trim()}
         >
-          <span>{player.observer_slot}</span>
+          <span>{player?.observer_slot}</span>
         </div>
         <div
-          key={`${player.steamid || player.name}-pointer`}
+          key={`${player?.steamid || player?.name}-pointer`}
           className="player-indicator"
           style={{
-            top: playerPosition.y + '%',
-            left: playerPosition.x + '%',
-            opacity: player.state.health === 0 ? 0 : 1,
+            top: playerPosition?.y + '%',
+            left: playerPosition?.x + '%',
+            opacity: player?.state?.health === 0 ? 0 : 1,
             transform: `rotate(${playerAngle - 45}deg) translate(-50%, -50%)`,
           }}
         />

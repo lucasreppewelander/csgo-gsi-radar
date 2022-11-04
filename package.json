@@ -5,12 +5,16 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --open --config webpack.dev.js",
-    "build": "rimraf ./dist && webpack --config webpack.prod.js && node generate-publish-package.js"
+    "build": "rimraf ./dist && webpack --config webpack.prod.js && node generate-publish-package.js",
+    "build:patch": "npm run build --type=2"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lucasreppewelander/csgo-gsi-radar.git"
   },
+  "files": [
+    "/src"
+  ],
   "keywords": [
     "react",
     "csgo",
