@@ -1,6 +1,6 @@
 {
   "name": "react-csgo-radar",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "A drop-in radar implementation in react with GSI information",
   "main": "index.js",
   "scripts": {
